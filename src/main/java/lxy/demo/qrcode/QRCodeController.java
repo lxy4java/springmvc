@@ -3,9 +3,11 @@ package lxy.demo.qrcode;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Hashtable;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,11 +29,38 @@ public class QRCodeController {
 	/***
 	 * 指定输出类型为 图片
 	 * 
-	 * */
+	 */
 	@RequestMapping(value = "/qrcode", produces = MediaType.IMAGE_JPEG_VALUE)
 	public byte[] getQRCode(String content, int width, int height) {
 
-		return toImageStream(content,width,height).toByteArray();
+		return toImageStream(content, width, height).toByteArray();
+	}
+
+	/***
+	 * 指定输出类型为 图片
+	 * 
+	 * 如果需要二维码被当作图片现在 请在header 里注明 Content-Disposition
+	 * 
+	 */
+	@RequestMapping(value = "/qrcodedownload", produces = MediaType.IMAGE_JPEG_VALUE)
+	public byte[] getQRCodeDownload(String content, int width, int height, HttpServletResponse res) {
+		if (width == 0 || height == 0) {
+			width = 300;
+			height = 300;
+		}
+		res.addHeader("Content-Disposition", "attachment;filename=" + "qrcode.jpg");
+
+		byte[] byt = toImageStream(content, width, height).toByteArray();
+		try {
+			OutputStream os = res.getOutputStream();
+			os.write(byt);
+			os.flush();
+			os.close();
+		} catch (IOException e) {
+
+		}
+
+		return null;
 	}
 
 	public static BufferedImage toBufferedImage(String content, int width, int height) {
