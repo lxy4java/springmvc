@@ -26,7 +26,7 @@
 		<junit.version>4.10</junit.version>
 		<easymock.version>3.1</easymock.version>
 		<json.version>1.2.6</json.version>
-		<springversion>4.2.5.RELEASE</springversion>
+		<springversion>4.3.4.RELEASE</springversion>
 		<org.slf4j-version>1.7.21</org.slf4j-version>
 
 	</properties>
@@ -39,7 +39,11 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${springversion}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${springversion}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
@@ -111,6 +115,18 @@
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>2.5</version>
+		</dependency>
+		<!-- -定时器 -->
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>2.2.3</version>
+		</dependency>
+		<!-- -jtest -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
 		</dependency>
 
 	</dependencies>
