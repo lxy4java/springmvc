@@ -141,7 +141,12 @@
 			<artifactId>dubbo-sms-api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-
+		<!-- dubbo 注解使用 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>dubbo-container-spring-annotation</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 		<!-- dubbo 相关 结束 -->
 
 	</dependencies>
