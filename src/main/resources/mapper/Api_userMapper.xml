@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="lxy.demo.transaction.dao.IApi_userDao">
+	<!-- 全部字段列表，供查询单个实体使用 -->
+	<sql id="allColumn">
+		user_id,user_uuid,user_name,nick_name,real_name,password,sex,user_height,user_weight,header_img_url,email_binded,phone_num_binded,watch_imei_binded,role_type,user_status,create_time,birthday,cid,honor,school,grade,motto,ispay,payDate,dueDate,reporterStation,score,reporterLevel,reporterNo,auditStatus
+	</sql>
+	<!-- 部分字段列表，供查询列表实体使用 -->
+	<sql id="briefColumn">
+		user_id,user_uuid,user_name,nick_name,real_name,password,sex,user_height,user_weight,header_img_url,email_binded,phone_num_binded,watch_imei_binded,role_type,user_status,create_time,birthday,cid,honor,school,grade,motto,ispay,payDate,dueDate,reporterStation,score,reporterLevel,reporterNo,auditStatus
+	</sql>
+	<sql id="base_column_insert">
+		user_uuid,user_name,nick_name,real_name,password,sex,user_height,user_weight,header_img_url,email_binded,phone_num_binded,watch_imei_binded,role_type,user_status,create_time,birthday,cid,honor,school,grade,motto,ispay,payDate,dueDate,reporterStation,score,reporterLevel,reporterNo,auditStatus
+	</sql>
+	<sql id="base_column_insert_param">
+		#{user_uuid},#{user_name},#{nick_name},#{real_name},#{password},#{sex},#{user_height},#{user_weight},#{header_img_url},#{email_binded},#{phone_num_binded},#{watch_imei_binded},#{role_type},#{user_status},#{create_time},#{birthday},#{cid},#{honor},#{school},#{grade},#{motto},#{ispay},#{payDate},#{dueDate},#{reporterStation},#{score},#{reporterLevel},#{reporterNo},#{auditStatus}
+	</sql>
+	<sql id="base_column_insert_list">
+		#{item.user_uuid},#{item.user_name},#{item.nick_name},#{item.real_name},#{item.password},#{item.sex},#{item.user_height},#{item.user_weight},#{item.header_img_url},#{item.email_binded},#{item.phone_num_binded},#{item.watch_imei_binded},#{item.role_type},#{item.user_status},#{item.create_time},#{item.birthday},#{item.cid},#{item.honor},#{item.school},#{item.grade},#{item.motto},#{item.ispay},#{item.payDate},#{item.dueDate},#{item.reporterStation},#{item.score},#{item.reporterLevel},#{item.reporterNo},#{item.auditStatus}
+	</sql>
+	<update id="update" parameterType="Api_user">
+		update api_user
+		<set>
+			<if test="user_uuid!=null">user_uuid=#{user_uuid},</if>
+			<if test="user_name!=null">user_name=#{user_name},</if>
+			<if test="nick_name!=null">nick_name=#{nick_name},</if>
+			<if test="real_name!=null">real_name=#{real_name},</if>
+			<if test="password!=null">password=#{password},</if>
+			<if test="sex!=null">sex=#{sex},</if>
+			<if test="user_height!=null">user_height=#{user_height},</if>
+			<if test="user_weight!=null">user_weight=#{user_weight},</if>
+			<if test="header_img_url!=null and header_img_url!=''">header_img_url=#{header_img_url},</if>
+			<if test="email_binded!=null">email_binded=#{email_binded},</if>
+			<if test="phone_num_binded!=null">phone_num_binded=#{phone_num_binded},</if>
+			<if test="watch_imei_binded!=null">watch_imei_binded=#{watch_imei_binded},</if>
+			<if test="role_type!=null">role_type=#{role_type},</if>
+			<if test="user_status!=null">user_status=#{user_status},</if>
+			<if test="create_time!=null">create_time=#{create_time},</if>
+			<if test="birthday!=null">birthday=#{birthday},</if>
+			<if test="cid!=null">cid=#{cid},</if>
+			<if test="honor!=null">honor=#{honor},</if>
+			<if test="school!=null">school=#{school},</if>
+			<if test="grade!=null">grade=#{grade},</if>
+			<if test="motto!=null">motto=#{motto},</if>
+			<if test="ispay!=null and ispay>0">ispay=#{ispay},</if>
+			<if test="payDate!=null">payDate=#{payDate},</if>
+			<if test="dueDate!=null">dueDate=#{dueDate},</if>
+			<if test="reporterStation!=null and reporterStation>0">reporterStation=#{reporterStation},</if>
+			<if test="score!=null and score>0">score=#{score},</if>
+			<if test="reporterLevel!=null and reporterLevel>0">reporterLevel=#{reporterLevel},</if>
+			<if test="auditStatus!=null and auditStatus>0">auditStatus=#{auditStatus},</if>
+			<if test="reporterNo!=null">reporterNo=#{reporterNo}</if>
+		</set>
+		where user_id = #{user_id}
+	</update>
+
+	<update id="updateList" parameterType="List">
+		<foreach collection="list" item="item" index="index" open=""
+			close="" separator=";">
+			update api_user
+			<set>
+				<if test="item.user_uuid!=null">user_uuid=#{item.user_uuid},</if>
+				<if test="item.user_name!=null">user_name=#{item.user_name},</if>
+				<if test="item.nick_name!=null">nick_name=#{item.nick_name},</if>
+				<if test="item.real_name!=null">real_name=#{item.real_name},</if>
+				<if test="item.password!=null">password=#{item.password},</if>
+				<if test="item.sex!=null">sex=#{item.sex},</if>
+				<if test="item.user_height!=null">user_height=#{item.user_height},</if>
+				<if test="item.user_weight!=null">user_weight=#{item.user_weight},</if>
+				<if test="item.header_img_url!=null">header_img_url=#{item.header_img_url},</if>
+				<if test="item.email_binded!=null">email_binded=#{item.email_binded},</if>
+				<if test="item.phone_num_binded!=null">phone_num_binded=#{item.phone_num_binded},</if>
+				<if test="item.watch_imei_binded!=null">watch_imei_binded=#{item.watch_imei_binded},</if>
+				<if test="item.role_type!=null">role_type=#{item.role_type},</if>
+				<if test="item.user_status!=null">user_status=#{item.user_status},</if>
+				<if test="item.create_time!=null">create_time=#{item.create_time},</if>
+				<if test="item.birthday!=null">birthday=#{item.birthday},</if>
+				<if test="item.cid!=null">cid=#{item.cid},</if>
+				<if test="item.honor!=null">honor=#{item.honor},</if>
+				<if test="item.school!=null">school=#{item.school},</if>
+				<if test="item.grade!=null">grade=#{item.grade},</if>
+				<if test="item.motto!=null">motto=#{item.motto},</if>
+				<if test="item.ispay!=null">ispay=#{item.ispay},</if>
+				<if test="item.payDate!=null">payDate=#{item.payDate},</if>
+				<if test="item.dueDate!=null">dueDate=#{item.dueDate},</if>
+				<if test="item.reporterStation!=null">reporterStation=#{item.reporterStation}</if>
+			</set>
+			where user_id = #{item.user_id}
+		</foreach>
+	</update>
+
+	<insert id="insertSetId" parameterType="Api_user"
+		useGeneratedKeys="true" keyProperty="user_id">
+		insert into
+		api_user(
+		<include refid="base_column_insert" />
+		)
+		values(
+		<include refid="base_column_insert_param" />
+		)
+	</insert>
+
+	<insert id="insert" parameterType="Api_user">
+		insert into
+		api_user(
+		<include refid="base_column_insert" />
+		)
+		values(
+		<include refid="base_column_insert_param" />
+		)
+	</insert>
+
+	<insert id="insertList" parameterType="List">
+		insert into
+		api_user(
+		<include refid="base_column_insert" />
+		)
+		values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(
+			<include refid="base_column_insert_list" />
+			)
+		</foreach>
+	</insert>
+
+	<delete id="delete" parameterType="int">
+		delete from api_user where
+		user_id = #{user_id}
+	</delete>
+
+	<delete id="deleteByParam" parameterType="map">
+		delete from api_user
+		<where>
+			<!-- 以下查询条件为模拟生成，请大家开发时进行修改 -->
+			<if test="user_uuid!=null">and user_uuid=#{user_uuid}</if>
+			<if test="user_name!=null">and user_name=#{user_name}</if>
+			<if test="nick_name!=null">and nick_name=#{nick_name}</if>
+		</where>
+	</delete>
+
+	<select id="load" resultType="Api_user" parameterType="int">
+		select
+		<include refid="allColumn" />
+		from api_user where user_id=#{user_id}
+	</select>
+
+	<select id="loadByParam" resultType="Api_user" parameterType="map">
+		select
+		<include refid="allColumn" />
+		from api_user
+		<where>
+			<!-- 以下查询条件为模拟生成，请大家开发时进行修改 -->
+			<if test="user_uuid!=null">and user_uuid=#{user_uuid}</if>
+			<if test="user_name!=null">and user_name=#{user_name}</if>
+			<if test="nick_name!=null">and nick_name=#{nick_name}</if>
+			<if test="watch_imei_binded!=null">and watch_imei_binded=#{watch_imei_binded}</if>
+			<if test="phone_num_binded!=null">and phone_num_binded=#{phone_num_binded}</if>
+			<if test="role!=null">and (role_type=1 or role_type=10)</if>
+		</where>
+	</select>
+
+	<select id="list" resultType="Api_user">
+		select
+		<include refid="briefColumn" />
+		from api_user
+	</select>
+
+	<select id="listByParam" resultType="Api_user" parameterType="map">
+		select
+		<include refid="briefColumn" />
+		from api_user
+		<where>
+			<!-- 以下查询条件为模拟生成，请大家开发时进行修改 -->
+			<if test="user_uuid!=null">and user_uuid=#{user_uuid}</if>
+			<if test="user_name!=null">and user_name=#{user_name}</if>
+			<if test="nick_name!=null">and nick_name=#{nick_name}</if>
+		</where>
+	</select>
+
+	<select id="find" resultType="Api_user" parameterType="map">
+		select
+		<include refid="briefColumn" />
+		from api_user
+		<where>
+			<!-- 以下查询条件为模拟生成，请大家开发时进行修改 -->
+			<if test="user_uuid!=null">and user_uuid=#{user_uuid}</if>
+			<if test="user_name!=null">and user_name=#{user_name}</if>
+			<if test="nick_name!=null">and nick_name=#{nick_name}</if>
+		</where>
+		<if test="sort!= null">
+			order by ${sort}
+			<if test="order!= null"> ${order} </if>
+		</if>
+		<if test="pageOffset!= null"> limit #{pageOffset},#{pageSize} </if>
+	</select>
+
+	<select id="findCount" resultType="int" parameterType="map">
+		select count(*) from api_user
+		<where>
+			<!-- 以下查询条件为模拟生成，请大家开发时进行修改 -->
+			<if test="user_uuid!=null">and user_uuid=#{user_uuid}</if>
+			<if test="user_name!=null">and user_name=#{user_name}</if>
+			<if test="nick_name!=null">and nick_name=#{nick_name}</if>
+		</where>
+	</select>
+	<select id="isReporter" resultType="int" parameterType="map">
+		select
+		count(1) from api_user
+		where user_status = 1 and ispay = 1 and dueDate >= #{dueDate}
+		and user_id =#{user_id}
+	</select>
+
+	<update id="updateMoney" parameterType="map">
+			update api_user 
+			<if test="type == 1">
+				 SET money = money+#{money} 
+			</if>
+			<if test="type != 1">
+			 	SET money = money-#{money} 
+			</if>
+			WHERE user_id =#{user_id}	
+	</update>
+
+</mapper> 

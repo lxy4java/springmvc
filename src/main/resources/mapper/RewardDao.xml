@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="lxy.demo.transaction.dao.RewardDao">
+
+	<insert id="save" parameterType="Reward" >
+		INSERT INTO reward(user_id,user_name,from_id,from_name,money,article_id,article_title,reason)
+				VALUES(#{user_id},#{user_name},#{from_id},#{from_name},#{money},#{article_id},#{article_title},#{reason})
+	</insert>
+	
+	<select id="query" resultType="Reward" parameterType="Reward" >
+		select user_id,user_name,from_id,from_name,money,article_id,article_title,reason 
+		from reward
+		<where>
+			<if test="user_id != null and user_id !=''">
+				and user_id =#{user_id}
+			</if>
+			<if test="from_id != null and from_id !=''">
+				and from_id =#{from_id}
+			</if>
+			<if test="article_id !=null and article_id != ''">
+				and article_id =#{article_id}
+			</if>
+			<if test="article_title !=null and article_title != ''">
+				and article_title like '%${article_title}%'
+			</if>
+		</where>
+	
+	</select>
+</mapper> 
